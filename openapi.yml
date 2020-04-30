@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  title: cs importer
+  version: '1.0'
+servers:
+  - url: 'http://localhost:2000'
+paths:
+  '/git/github/rights/{username}/{repo}':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  permission:
+                    type: string
+                    enum:
+                      - admin
+                      - write
+                      - read
+      operationId: get-git-github-rights-username-repo
+      description: Gets rights for repo
+  '/git/github/info/{username}/{repo}/tree/{branch}/{path0}':
+    parameters:
+      - schema:
+          type: string
+        name: branch
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path0
+        in: path
+        required: true
+    get:
+      description: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+      operationId: 'get-git-github-info-:username-:repo-tree-branch-path-0'
+  '/git/github/info/{username}/{repo}/tree/{branch}/{path0}/{path1}':
+    parameters:
+      - schema:
+          type: string
+        name: branch
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path0
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path1
+        in: path
+        required: true
+    get:
+      description: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+      operationId: 'get-git-github-info-:username-:repo-tree-branch-path-1'
+  '/git/github/info/{username}/{repo}/blob/{branch}/{path0}/{path1}':
+    parameters:
+      - schema:
+          type: string
+        name: branch
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path0
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path1
+        in: path
+        required: true
+    get:
+      description: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+      operationId: 'get-git-github-info-:username-:repo-blob-branch-path-1'
+  '/git/github/info/{username}/{repo}/blob/{branch}/{path0}':
+    parameters:
+      - schema:
+          type: string
+        name: branch
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: path0
+        in: path
+        required: true
+    get:
+      description: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+      operationId: 'get-git-github-info-:username-:repo-blob-branch-path-0'
+  '/git/github/info/{username}/{repo}/commit/{branch}':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: branch
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Info'
+      operationId: get-git-github-info-username-repo-commit-branch
+  '/git/github/info/{username}/{repo}/pull/{pull}':
+    parameters:
+      - schema:
+          type: string
+        name: username
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: repo
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: pull
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PullInfo'
+      operationId: get-git-github-info-username-repo-pull-pull
+components:
+  schemas:
+    Info:
+      title: Info
+      type: object
+      description: Info for a github user
+      properties:
+        commitSha:
+          type: string
+        username:
+          type: string
+        repo:
+          type: string
+        branch:
+          type: string
+        path:
+          type: string
+      required:
+        - commitSha
+        - username
+        - repo
+        - branch
+        - path
+    PullInfo:
+      title: PullInfo
+      type: object
+      properties:
+        repo:
+          type: string
+        username:
+          type: string
+        branch:
+          type: string
+      required:
+        - repo
+        - username
+        - branch

@@ -8,7 +8,7 @@ import log from "../../utils/log";
 
 import { ITree, IGitInfo } from "./push";
 
-const API_URL = "https://api.github.com";
+const API_URL = process.env.GITHUB_API_URL;
 const REPO_BASE_URL = API_URL + "/repos";
 
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
@@ -131,6 +131,7 @@ export async function fetchRights(
   token?: string
 ): Promise<"admin" | "write" | "read" | "none"> {
   const url = buildRepoApiUrl(username, repo);
+  console.log(`Making call to ${url}...`);
 
   try {
     const headers: { Authorization?: string } = {};
@@ -143,6 +144,7 @@ export async function fetchRights(
       headers
     });
 
+    console.log(`Response: ${response}`);
     if (response.data.permissions.admin) {
       return "admin";
     }

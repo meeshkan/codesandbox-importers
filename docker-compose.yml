@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+
+  app:
+    build:
+      context: ./
+      dockerfile: Dockerfile.test
+    environment:
+      - GITHUB_API_URL=http://mock/https://api.github.com/
+    ports:
+      - "2000:2000"
+
+  mock:
+    build:
+      context: ./
+      dockerfile: Dockerfile.meeshkan
+    ports:
+      - "3000:80"
